@@ -1,0 +1,332 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "version": "1.0.0",
+      "title": "Task API",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": ""
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      },
+      {
+        "url": "https://localhost:3000"
+      }
+      
+    ],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "paths": {
+      "/tasks": {
+      
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Create New Task",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "contentType"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                  
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      },
+     
+    
+    "put": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Update task by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the task"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description"],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "default": "active"
+                  },
+                  "language": {
+                    "type": "string",
+                    "default": "en"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+    },
+
+    "get": {
+      "tags": [
+        "Task"
+      ],
+      "summary": "Get Tasks by id",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "query",  
+          "type": "string",
+          "default": false
+        },
+        {
+          "name": "language",
+          "in": "query",  
+          "type": "string",
+          "default": "en"
+        }
+      ],
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "data": {  
+                    "type": "array"   
+                  }
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "description": "unexpected error"
+        }
+      }
+    },
+
+    "get": {
+      "tags": [
+        "Task"
+      ],
+      "summary": "Get All Task list",
+      "parameters": [
+
+        {
+          "name": "language",
+          "in": "query",  
+          "type": "string",
+          "default": "en"
+        }
+      ],
+      "responses": {
+        "200": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "data": {  
+                    "type": "array"   
+                  }
+                }
+              }
+            }
+          }
+        },
+        "default": {
+          "description": "unexpected error"
+        }
+      }
+    },
+   
+    "delete": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Delete task by Id",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "en"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "default": "null"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+    }
+      
+    }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "Error": {
+          "required": [
+            "status",
+            "message"
+          ],
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "integer",
+              "description": "1 for success 0 for failure"
+            },
+            "message": {
+              "type": "string",
+              "description": "message to be displayed in alert"
+            }
+          }
+        }
+      }
+    }
+  }

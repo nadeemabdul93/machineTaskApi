@@ -14,8 +14,8 @@ export const getString = (lang, name) => {
 }
 
 export const taskStatus = {
-  active: 1,
-  inActive: 2,
+  completed: 'completed',
+  active: 'active',
 }
 export const getJwtToken = async (data) => {
   // const token = Jwt.sign(data, config.JWT_SECRET, {

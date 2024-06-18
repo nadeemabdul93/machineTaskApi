@@ -45,4 +45,5 @@ let server = http.createServer(options, app).listen(PORT, function () {
       `QT PET listening on port ${PORT}! Go to https://${getLocalIP()}:${PORT}/`
     );
   });
+  export default app;
   

@@ -59,7 +59,7 @@ export const addTask = async (req, res) => {
 export const getTaskById = async (req, res) => {
     try {
       const { id, language } = req.params;
-        console.log("params",id);
+        // console.log("params",id);
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.send({

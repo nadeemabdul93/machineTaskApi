@@ -207,7 +207,7 @@
                     },
                     "status": {
                       "type": "string",
-                      "default": "active"
+                      "default": "completed"
                     },
                     "language": {
                       "type": "string",

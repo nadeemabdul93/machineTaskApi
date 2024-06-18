@@ -16,12 +16,12 @@ import checkToken from "../../helper/common/JWT.middleware.js";
 
 
 // routes
-router.post("/", loginAuth, validate("taskForm"),addTask);
-router.get("/:id",loginAuth,getTaskById);
-router.get("/",loginAuth,getTaskList);
+router.post("/", validate("taskForm"),addTask);
+router.get("/:id",getTaskById);
+router.get("/",getTaskList);
 
-router.put("/:id?",loginAuth, validate("taskForm"), updateTaskById );
-router.delete("/:id?", loginAuth, deleteTaskById);
+router.put("/:id?", validate("taskForm"), updateTaskById );
+router.delete("/:id?", deleteTaskById);
 // router.post("/tasks", loginAuth, addtask);
 
 

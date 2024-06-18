@@ -30,3 +30,6 @@ node index.js
 
 ## api URL
 htpp://localhost:3000/machineTestApi/
+
+## use token for authenticaton
+qtPet#@swagger

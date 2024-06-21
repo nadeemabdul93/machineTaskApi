@@ -7,8 +7,8 @@ import geolib from "geolib";
 import moment from "moment"
 import bcrypt from "bcrypt"
 import { body } from "express-validator";
+import userSchemaModel from "../../model/userSchema.js";
 import mongoose from "mongoose";
-const encryptionKey = 'asdfghjklzxcvb@#$%&*!)1234567890';
 export const getString = (lang, name) => {
   return MESSAGES_DATA[name];
 }
@@ -18,11 +18,12 @@ export const taskStatus = {
   active: 'active',
 }
 export const getJwtToken = async (data) => {
-  // const token = Jwt.sign(data, config.JWT_SECRET, {
-  //   expiresIn: config.JWT_EXPIRES_IN,
-  // });
-  const token = Jwt.sign(data, config.JWT_SECRET); // save toekn to db and check by it 🙂
-  const jwtToken = await bcrypt.hash(token, 10);
-  var updt = await userSchemaModel.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(data.id) }, { jwtToken: jwtToken });
-  return token;
+ 
+  try {
+    const token = Jwt.sign(data, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRES_IN });
+    return token;
+  } catch (error) {
+    console.error('Error generating JWT token:', error);
+    throw new Error('Failed to generate JWT token');
+  }
 }

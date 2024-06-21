@@ -11,9 +11,6 @@ import fs from "fs";
 import path from "path";
 import taskSchemaModel from "../../model/taskSchema.js";
 import jwt from "jsonwebtoken";
-import taskResponse from "../../response/taskResponse.js";
-
-
 
 export const addTask = async (req, res) => {
   try {
@@ -36,14 +33,12 @@ export const addTask = async (req, res) => {
     if(!saveTask  && saveTask == false){
         return res.send({
             status: false,
-            // message: getString(language, "")
             message: getString(language, "taskNotSaved")
           });
     }
 
     return res.send({
-        status: true,
-       
+        status: true,       
         message: getString(language, "taskSaved")
       });
       

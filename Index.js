@@ -8,6 +8,7 @@ import fs from "fs";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import taskRoute from "./src/api/task/index.js";
+import usersRoute from "./src/api/user/index.js"
 import { getLocalIP } from "./src/helper/util/localIp.js";
 import moment from "moment-timezone";
 import logger from "./logger.js";
@@ -36,6 +37,7 @@ app.use("/machineTaskApi", swaggerUi.serve, (...args) =>
   );
   app.use(express.json()); 
 app.use("/tasks", taskRoute);
+app.use("/users", usersRoute);
 let options={}
 let server = http.createServer(options, app).listen(PORT, function () {
     logger.info(

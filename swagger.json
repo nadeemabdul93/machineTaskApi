@@ -27,280 +27,557 @@
       }
     ],
     "paths": {
-      "/tasks": {
-        "get": {
-          "tags": [
-            "Task"
-          ],
-          "summary": "Get All Task list",
-          "parameters": [
-            {
-              "name": "language",
-              "in": "query",
-              "type": "string",
-              "default": "en"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "array"
-                      }
-                    }
+    "/users/register": {
+      "post": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "User Registration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "contentType"
+                ],
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },                  
+                  "userType": {
+                    "type": "string",
+                    "default": "user"
+                  },
+                  "language": {
+                    "type": "string",
+                    "default": "en"
                   }
+                
                 }
               }
-            },
-            "default": {
-              "description": "Unexpected error"
             }
           }
         },
-        "post": {
-          "tags": [
-            "Task"
-          ],
-          "summary": "Create New Task",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "title",
-                    "description"
-                  ],
-                  "properties": {
-                    "title": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "Unexpected error"
-            }
-          }
-        }
-      },
-      "/tasks/{id}": {
-        "get": {
-          "tags": [
-            "Task"
-          ],
-          "summary": "Get Task by id",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "Unique identifier of the task"
-            },
-            {
-              "name": "language",
-              "in": "query",
-              "type": "string",
-              "default": "en"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "Unexpected error"
-            }
-          }
-        },
-        "put": {
-          "tags": [
-            "Task"
-          ],
-          "summary": "Update task by Id",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "Unique identifier of the task"
-            }
-          ],
-          "requestBody": {
-            "required": true,
+        "responses": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "title",
-                    "description"
-                  ],
                   "properties": {
-                    "title": {
-                      "type": "string"
-                    },
-                    "description": {
-                      "type": "string"
-                    },
                     "status": {
-                      "type": "string",
-                      "default": "completed"
+                      "type": "boolean"
                     },
-                    "language": {
-                      "type": "string",
-                      "default": "en"
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
                     }
                   }
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "object"
-                      }
-                    }
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "Login User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "contentType"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "default": "abbulnadim93@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "12345678"
+                  },
+                  "userType": {
+                    "type": "string",
+                    "default":"user"
+                  },
+                  "language": {
+                    "type": "string",
+                    "default": "en"
                   }
+                  
+                  
+  
                 }
               }
-            },
-            "default": {
-              "description": "Unexpected error"
             }
           }
         },
-        "delete": {
-          "tags": [
-            "Task"
-          ],
-          "summary": "Delete task by Id",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "Unique identifier of the task"
-            },
-            {
-              "name": "language",
-              "in": "query",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "default":"en"
-              }
-              
-            }
-          ],
-          
-          "responses": {
-            "200": {
-              "description": "Successful response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "boolean"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "object"
-                      }
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
                     }
                   }
                 }
               }
-            },
-            "default": {
-              "description": "Unexpected error"
             }
+          },
+          "default": {
+            "description": "unexpected error"
           }
         }
-        
       }
+    },
+    "/users/logout": {
+      "get": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "Logout",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "default": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/users/updateProfile": {
+      "put": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "Update Profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "contentType"
+                ],
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string",
+                    "default":"en"
+                  }                  
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "tags": [
+          "USER"
+        ],
+        "summary": "profile Details",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "default": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get All Task list",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "default": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Create New Task",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string",
+                    "default": "en"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get Task by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the task"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "type": "string",
+            "default": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Update task by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the task"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "default": "completed"
+                  },
+                  "language": {
+                    "type": "string",
+                    "default": "en"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Delete task by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the task"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default":"en"
+            }
+            
+          }
+        ],
+        
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+      
+    }
       
     },
     "externalDocs": {

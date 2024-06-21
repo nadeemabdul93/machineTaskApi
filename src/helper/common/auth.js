@@ -5,40 +5,9 @@ import dataBase from "../config/db.js";
 /**
  * @Method Use For check login authentication
  * @author Abdul Nadeem
- * @date 09-JAN 2024
+ * @date 21-jun 2024
  */
 
-// export const loginAuth = (req, res, next) =>
-// {
-//     const bearerHeader = req.headers["authorization"];
-
-    
-
-//     if (bearerHeader)
-//     {
-//         const bearer = bearerHeader.split(" ");
-
-//         if (bearer.length > 1)
-//         {
-//             const bearerToken = bearer[1];
-//             if (bearerToken == config.LOGIN_BEARER)
-//             {
-//                 return next();
-//             } else
-//             {
-//                 res.status(401).send({
-//                     status: false,
-//                     message: "Token is not valid",
-//                 });
-//             }
-//         }
-//     }
-//     console.log("receive token== " + bearerHeader);
-//     res.status(401).send({
-//         status: false,
-//         message: "Token is not valid",
-//     });
-// };
 export const loginAuth = (req, res, next) =>{
     var result=loginFun(req,res);
     if(result){
